@@ -1,5 +1,4 @@
-const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-4';
-const apiKey = 'indradev';
+const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-completions?apikey=indradev';
 
 async function fetchGPTResponse(userInput) {
     const requestData = [
@@ -13,15 +12,14 @@ async function fetchGPTResponse(userInput) {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify(requestData)
         });
 
         const result = await response.json();
 
-        if (result.status === 200) {
-            return result.data.msg;
+        if (result.status === 200 && result.data) {
+            return result.data.msg || 'Sorry, no message received.';
         } else {
             console.error('Error:', result);
             return 'Sorry, something went wrong.';
