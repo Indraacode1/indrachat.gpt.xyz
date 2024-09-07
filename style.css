@@ -7,7 +7,6 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
 }
 
 #header {
@@ -18,74 +17,133 @@ body {
     color: #e8eaed;
     background-color: #303134;
     border-bottom: 1px solid #3c4043;
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 
 #chat-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
+    overflow: hidden;
+}
+
+#messages {
+    flex: 1;
     overflow-y: auto;
-    margin-bottom: 80px;
+    padding: 10px 0;
+    margin-bottom: 10px; /* Pastikan ada ruang di bawah pesan */
 }
 
 .message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
     max-width: 80%;
+    word-wrap: break-word;
 }
 
-.message.ai {
+.user-message {
+    align-items: flex-end;
+    margin-right: 20px; /* Atur perataan pesan pengguna (kanan) */
+}
+
+.ai-message {
+    align-items: flex-start;
+    margin-left: 20px; /* Atur perataan pesan AI (kiri) */
+}
+
+.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #5f6368;
+    margin-right: 10px;
+}
+
+.message-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.text {
+    background-color: #3c4043;
+    color: #c9c9c9;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: calc(100% - 60px); /* Sesuaikan lebar untuk mengakomodasi gambar profil */
+    word-wrap: break-word;
+}
+
+.user-message .text {
     background-color: #303134;
-    align-self: flex-start;
-    margin-left: 5px; /* Geser sedikit ke kiri */
+    color: #e8eaed;
 }
 
-.message.user {
-    background-color: #0b93f6;
-    color: white;
-    align-self: flex-end;
-    margin-right: 5px; /* Geser sedikit ke kanan */
+.controls {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 5px;
 }
 
-#input-container {
+.ai-button {
+    background: none;
+    border: none;
+    color: #c9c9c9;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.ai-button:hover {
+    color: #e8eaed;
+}
+
+#input-area {
+    display: flex;
+    align-items: center;
+    background-color: #202123;
+    padding: 10px;
+    border-top: 1px solid #3c4043;
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
-    background-color: #303134;
-    padding: 10px;
-    display: flex;
     box-sizing: border-box;
-    z-index: 10;
+    justify-content: center; /* Pusatkan area input */
 }
 
 #input {
     flex: 1;
     padding: 10px;
+    border: none;
     border-radius: 20px;
-    border: none;
-    background-color: #202123;
+    background-color: #303134;
     color: #e8eaed;
+    font-size: 14px;
     margin-right: 10px;
+    margin-left: 10px; /* Geser sedikit bidang input ke kanan */
 }
 
-#sendButton {
-    background-color: #0b93f6;
+#input::placeholder {
+    color: #c9c9c9;
+}
+
+#send-button {
+    background-color: #3c4043;
+    color: #e8eaed;
     border: none;
-    padding: 10px 15px;
     border-radius: 50%;
-    color: white;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
     cursor: pointer;
-    margin-left: 5px; /* Geser sedikit ke kiri */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px; /* Geser sedikit tombol kirim ke kanan */
 }
 
-#sendButton:hover {
-    background-color: #0a82d5;
+#send-button:hover {
+    background-color: #5f6368;
 }
