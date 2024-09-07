@@ -43,6 +43,7 @@ body {
     padding: 10px; /* Added padding to create space around messages */
     box-sizing: border-box;
     margin-bottom: 60px; /* Ensure space for input area */
+    padding-right: 60px; /* Ensure space for send button */
 }
 
 .message {
@@ -51,6 +52,7 @@ body {
     margin-bottom: 10px;
     max-width: 80%;
     word-wrap: break-word;
+    margin-left: auto; /* Align messages to the right */
 }
 
 .user-message {
@@ -124,6 +126,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+button.copy {
+    color: #b0b0b0; /* Light grey color for copy button text */
 }
 
 /* Remove CSS for non-essential buttons */
