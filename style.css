@@ -128,7 +128,7 @@ body {
     border-radius: 20px;
     background-color: #303134;
     color: #e8eaed;
-    font-size: 14px;
+    font-size: 16px;
     max-width: calc(100% - 70px); /* Full width minus button space */
 }
 
@@ -148,6 +148,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 10px;
 }
 
 #send-button:hover {
