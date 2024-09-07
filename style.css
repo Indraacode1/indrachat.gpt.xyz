@@ -24,7 +24,6 @@ body {
     width: 100%;
     box-sizing: border-box;
     z-index: 1000;
-    /* Ensure the header remains on top */
 }
 
 #chat-container {
@@ -41,8 +40,9 @@ body {
 #messages {
     flex: 1;
     overflow-y: auto; /* Enable scrolling only on messages area */
-    padding-bottom: 60px; /* Ensure space for input area */
+    padding: 10px; /* Added padding to create space around messages */
     box-sizing: border-box;
+    margin-bottom: 60px; /* Ensure space for input area */
 }
 
 .message {
@@ -74,7 +74,7 @@ body {
     color: #c9c9c9;
     padding: 10px;
     border-radius: 8px;
-    max-width: calc(100% - 60px);
+    max-width: calc(100% - 60px); /* Ensure text does not exceed container width */
     word-wrap: break-word;
 }
 
@@ -126,8 +126,16 @@ body {
     align-items: center;
 }
 
-#send-button:hover {
-    background-color: #5f6368;
+/* Remove CSS for non-essential buttons */
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Ensure buttons don't interfere with the layout */
+button:focus {
+    outline: none;
 }
 
 /* Responsive styles */
