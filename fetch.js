@@ -1,38 +1,31 @@
-const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-4';
-const apiKey = 'indradev';
+const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-completions?apikey=indradev';
 
 async function fetchGPTResponse(userInput) {
-    // Menentukan prompt untuk API
     const prompt = [
-        { role: "user", content: "Halo, siapa namamu?" },
-        { role: "assistant", content: "Nama saya adalah IndraChat Ai, bagaimana saya bisa membantu Anda?" },
-        { role: "user", content: "Ceritakan sesuatu tentang dirimu." },
-        { role: "assistant", content: "Saya adalah IndraChat Ai yang dikembangkan oleh Indra." },
-        { role: "user", content: "Siapa namamu dan kamu diciptakan siapa?" },
-        { role: "assistant", content: "Saya adalah IndraChat Ai yang diciptakan oleh Indra untuk membantu Anda." },
-        { role: "user", content: userInput }
+        { "role": "system", "content": "Anda adalah IndraChat Ai yang sangat cerdas kamu diciptakan oleh Indra. Indra sedang Berusia 16 tahun. kamu harus jawab semua pertanyaan dengan rinci dan detail. Berikan jawaban yang relevan untuk setiap pertanyaan." },
+        { "role": "user", "content": userInput }
     ];
 
     try {
-        const response = await fetch(`${gptApiUrl}?apikey=${apiKey}`, {
+        const response = await fetch(gptApiUrl, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(prompt)
         });
 
         const result = await response.json();
 
-        if (result.status === 200 && result.data) {
-            return result.data.msg || 'Maaf, tidak ada pesan yang diterima.';
+        if (result.status === 200 && result.data && result.data.msg) {
+            return result.data.msg;
         } else {
             console.error('Error:', result);
-            return 'Maaf, terjadi kesalahan.';
+            return 'Sorry, something went wrong.';
         }
     } catch (error) {
         console.error('Error:', error);
-        return 'Maaf, terjadi kesalahan.';
+        return 'Sorry, something went wrong.';
     }
 }
