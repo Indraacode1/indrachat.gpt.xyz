@@ -26,6 +26,9 @@ body {
     flex: 1;
     overflow-y: auto;
     padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Ensures latest messages appear at the bottom */
 }
 
 .message {
@@ -143,7 +146,7 @@ body {
     font-weight: bold;
     color: #e8eaed;
     background-color: #303134;
-    border-bottom: 1px solid #3c4043;
+    border-bottom: 2px solid #3c4043; /* Increased border size */
     position: fixed; /* Keeps header at the top of the screen */
     top: 0;
     width: 100%;
@@ -184,6 +187,7 @@ body {
     #header {
         font-size: 20px; /* Smaller header font size */
         padding: 10px 0;
+        border-bottom: 2px solid #3c4043; /* Ensures border size is visible */
     }
 }
 
@@ -219,5 +223,6 @@ body {
     #header {
         font-size: 18px; /* Even smaller header font size */
         padding: 8px 0;
+        border-bottom: 2px solid #3c4043; /* Ensures border size is visible */
     }
 }
