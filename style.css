@@ -33,17 +33,16 @@ body {
     max-width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    overflow: hidden; /* Prevent scrolling on chat container */
     margin-top: 60px; /* Margin to prevent overlap with header */
+    overflow: hidden; /* Prevent scrolling on chat container */
 }
 
 #messages {
     flex: 1;
     overflow-y: auto; /* Enable scrolling only on messages area */
-    padding: 10px; /* Added padding to create space around messages */
+    padding: 10px;
     box-sizing: border-box;
     margin-bottom: 60px; /* Ensure space for input area */
-    padding-right: 60px; /* Ensure space for send button */
 }
 
 .message {
@@ -52,15 +51,16 @@ body {
     margin-bottom: 10px;
     max-width: 80%;
     word-wrap: break-word;
-    margin-left: auto; /* Align messages to the right */
 }
 
 .user-message {
     align-items: flex-end;
+    margin-left: auto; /* Align messages to the right */
 }
 
 .ai-message {
     align-items: flex-start;
+    margin-right: auto; /* Align messages to the left */
 }
 
 .profile {
