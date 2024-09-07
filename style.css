@@ -110,6 +110,7 @@ body {
     font-size: 14px;
     margin-right: 10px;
     box-sizing: border-box;
+    overflow: auto; /* Allows text area to expand if needed */
 }
 
 #input::placeholder {
@@ -128,6 +129,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 #send-button:hover {
@@ -146,10 +148,15 @@ body {
     top: 0;
     width: 100%;
     box-sizing: border-box;
+    z-index: 1000; /* Ensures header stays on top */
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
+    #chat-container {
+        height: calc(100vh - 50px); /* Adjust height for smaller screens */
+    }
+
     .message {
         max-width: 90%;
     }
@@ -173,9 +180,27 @@ body {
         height: 35px;
         font-size: 16px;
     }
+
+    #header {
+        font-size: 20px; /* Smaller header font size */
+        padding: 10px 0;
+    }
 }
 
 @media (max-width: 480px) {
+    #chat-container {
+        height: calc(100vh - 40px); /* Adjust height for very small screens */
+    }
+
+    .message {
+        max-width: 95%;
+    }
+
+    .profile {
+        width: 25px;
+        height: 25px;
+    }
+
     .text {
         font-size: 12px;
         padding: 6px;
@@ -189,5 +214,10 @@ body {
         width: 30px;
         height: 30px;
         font-size: 14px;
+    }
+
+    #header {
+        font-size: 18px; /* Even smaller header font size */
+        padding: 8px 0;
     }
 }
