@@ -1,3 +1,4 @@
+/* Default styles (for larger screens) */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #202123;
@@ -34,27 +35,12 @@ body {
     word-wrap: break-word;
 }
 
-.user-message {
-    align-items: flex-end;
-}
-
-.ai-message {
-    align-items: flex-start;
-    margin-right: 40px; /* Geser pesan AI ke kanan */
-}
-
 .profile {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background-color: #5f6368;
     margin-right: 10px;
-}
-
-.message-content {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 5px;
 }
 
 .text {
@@ -64,31 +50,6 @@ body {
     border-radius: 8px;
     max-width: calc(100% - 60px); /* Adjust width to accommodate profile image */
     word-wrap: break-word;
-}
-
-.user-message .text {
-    background-color: #303134;
-    color: #e8eaed;
-}
-
-.controls {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    margin-top: 5px;
-}
-
-.ai-button {
-    background: none;
-    border: none;
-    color: #c9c9c9;
-    margin-left: 10px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.ai-button:hover {
-    color: #e8eaed;
 }
 
 #input-area {
@@ -110,10 +71,6 @@ body {
     margin-right: 10px;
 }
 
-#input::placeholder {
-    color: #c9c9c9;
-}
-
 #send-button {
     background-color: #3c4043;
     color: #e8eaed;
@@ -128,29 +85,46 @@ body {
     align-items: center;
 }
 
-#send-button:hover {
-    background-color: #5f6368;
+/* Media queries for smaller screens */
+@media (max-width: 600px) {
+    .message {
+        max-width: 90%;
+    }
+
+    .profile {
+        width: 30px;
+        height: 30px;
+    }
+
+    .text {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #input {
+        font-size: 12px;
+    }
+
+    #send-button {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
 }
 
-#header {
-    text-align: center;
-    padding: 15px 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: #e8eaed;
-    background-color: #303134;
-    border-bottom: 1px solid #3c4043;
-}
+@media (max-width: 400px) {
+    .text {
+        font-size: 12px;
+        padding: 6px;
+    }
 
-.editable-text {
-    background: none;
-    border: none;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    resize: none;
-    outline: none;
-    width: 100%;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    #input {
+        font-size: 10px;
+    }
+
+    #send-button {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
 }
