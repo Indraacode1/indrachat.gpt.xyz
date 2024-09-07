@@ -1,11 +1,40 @@
-const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-4';
-const apiKey = 'indradev';
+const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-completions?apikey=indradev';
 const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Replace with your profile picture URL
 
 const input = document.getElementById('input');
 const sendButton = document.getElementById('send-button');
 const messagesContainer = document.getElementById('messages');
 let currentQuestion = '';
+
+async function fetchGPTResponse(userInput) {
+    const requestData = [
+        { "role": "user", "content": userInput },
+        { "role": "assistant", "content": "Nama saya adalah IndraChat Ai. Saya diciptakan oleh Indra untuk membantu Anda dengan berbagai pertanyaan dan informasi yang Anda butuhkan. Apakah ada yang bisa saya bantu?" }
+    ];
+
+    try {
+        const response = await fetch(gptApiUrl, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        const result = await response.json();
+
+        if (result.status === 200) {
+            return result.data.msg;
+        } else {
+            console.error('Error:', result);
+            return 'Sorry, something went wrong.';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return 'Sorry, something went wrong.';
+    }
+}
 
 function appendUserMessage(text) {
     const messageDiv = document.createElement('div');
@@ -115,6 +144,13 @@ async function handleSend() {
         } catch (error) {
             console.error('Error sending message:', error);
         }
+    }
+}
+
+function handleRepeat() {
+    if (currentQuestion) {
+        input.value = currentQuestion;
+        handleSend();
     }
 }
 
