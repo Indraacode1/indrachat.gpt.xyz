@@ -32,7 +32,7 @@ body {
     flex: 1;
     overflow-y: auto;
     padding: 10px 0;
-    margin-bottom: 10px; /* Ensure there is space below messages */
+    margin-bottom: 10px;
 }
 
 .message {
@@ -44,21 +44,13 @@ body {
 }
 
 .user-message {
-    align-items: flex-end;
-    margin-right: 20px; /* Adjust user message alignment (right) */
+    align-self: flex-end;
+    margin-right: 30px;
 }
 
 .ai-message {
-    align-items: flex-start;
-    margin-left: 20px; /* Adjust AI message alignment (left) */
-}
-
-.profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #5f6368;
-    margin-right: 10px;
+    align-self: flex-start;
+    margin-left: 30px;
 }
 
 .message-content {
@@ -71,7 +63,7 @@ body {
     color: #c9c9c9;
     padding: 10px;
     border-radius: 8px;
-    max-width: calc(100% - 60px); /* Adjust width to accommodate profile image */
+    max-width: 100%;
     word-wrap: break-word;
 }
 
@@ -80,70 +72,40 @@ body {
     color: #e8eaed;
 }
 
-.controls {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    margin-top: 5px;
-}
-
-.ai-button {
-    background: none;
-    border: none;
-    color: #c9c9c9;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 5px;
-}
-
-.ai-button:hover {
-    color: #e8eaed;
-}
-
 #input-area {
     display: flex;
-    align-items: center;
-    background-color: #202123;
     padding: 10px;
+    background-color: #303134;
     border-top: 1px solid #3c4043;
-    position: fixed;
+    position: sticky;
     bottom: 0;
-    width: 100%;
-    box-sizing: border-box;
-    justify-content: center; /* Center the input area */
 }
 
-#input {
+textarea {
     flex: 1;
     padding: 10px;
-    border: none;
-    border-radius: 20px;
-    background-color: #303134;
+    border-radius: 5px;
+    border: 1px solid #3c4043;
+    background-color: #202123;
     color: #e8eaed;
-    font-size: 14px;
-    margin-right: 10px;
-    margin-left: 10px; /* Shift input field slightly to the right */
+    resize: none;
+    margin-right: 10px; /* Geser ke kiri */
 }
 
-#input::placeholder {
-    color: #c9c9c9;
-}
-
-#send-button {
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
     background-color: #3c4043;
     color: #e8eaed;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px; /* Shift send button slightly to the right */
+    margin-left: 10px; /* Geser tombol kirim sedikit ke kanan */
 }
 
-#send-button:hover {
+button:hover {
     background-color: #5f6368;
+}
+
+button.copy {
+    color: #b0b0b0; /* Tombol copy abu-abu keputihan */
 }
