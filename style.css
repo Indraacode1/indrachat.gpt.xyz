@@ -1,4 +1,4 @@
-/* Default styles for larger screens */
+/* Default styles */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #202123;
@@ -8,33 +8,28 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden; /* Prevents body from scrolling */
+    overflow: hidden; /* Prevent scrolling on body */
 }
 
 #chat-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: calc(100vh - 60px); /* Adjusted height to account for header and input area */
+    height: 100%;
     max-width: 100%;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
-    overflow-y: auto; /* Allows scrolling within chat container */
+    overflow-y: hidden; /* Prevent scrolling on chat container */
 }
 
 #messages {
     flex: 1;
-    overflow-y: auto;
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Ensures latest messages appear at the bottom */
+    overflow-y: auto; /* Enable scrolling only on messages area */
+    padding-bottom: 60px; /* Ensure space for input area */
 }
 
 .message {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     margin-bottom: 10px;
     max-width: 80%;
     word-wrap: break-word;
@@ -46,7 +41,6 @@ body {
 
 .ai-message {
     align-items: flex-start;
-    margin-right: 40px; /* Move AI message to the right */
 }
 
 .profile {
@@ -62,32 +56,12 @@ body {
     color: #c9c9c9;
     padding: 10px;
     border-radius: 8px;
-    max-width: calc(100% - 60px); /* Adjust width to accommodate profile image */
+    max-width: calc(100% - 60px);
     word-wrap: break-word;
 }
 
 .user-message .text {
     background-color: #303134;
-    color: #e8eaed;
-}
-
-.controls {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    margin-top: 5px;
-}
-
-.ai-button {
-    background: none;
-    border: none;
-    color: #c9c9c9;
-    margin-left: 10px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.ai-button:hover {
     color: #e8eaed;
 }
 
@@ -97,10 +71,11 @@ body {
     background-color: #202123;
     padding: 10px;
     border-top: 1px solid #3c4043;
-    position: fixed; /* Keeps input area at the bottom of the screen */
+    position: fixed;
     bottom: 0;
     width: 100%;
     box-sizing: border-box;
+    z-index: 1000;
 }
 
 #input {
@@ -113,7 +88,6 @@ body {
     font-size: 14px;
     margin-right: 10px;
     box-sizing: border-box;
-    overflow: auto; /* Allows text area to expand if needed */
 }
 
 #input::placeholder {
@@ -132,7 +106,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
 }
 
 #send-button:hover {
@@ -146,32 +119,19 @@ body {
     font-weight: bold;
     color: #e8eaed;
     background-color: #303134;
-    border-bottom: 2px solid #3c4043; /* Increased border size */
-    position: fixed; /* Keeps header at the top of the screen */
+    border-bottom: 2px solid #3c4043;
+    position: fixed;
     top: 0;
     width: 100%;
     box-sizing: border-box;
-    z-index: 1000; /* Ensures header stays on top */
+    z-index: 1000;
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
-    #chat-container {
-        height: calc(100vh - 50px); /* Adjust height for smaller screens */
-    }
-
-    .message {
-        max-width: 90%;
-    }
-
-    .profile {
-        width: 30px;
-        height: 30px;
-    }
-
-    .text {
-        font-size: 14px;
-        padding: 8px;
+    #header {
+        font-size: 20px;
+        padding: 10px 0;
     }
 
     #input {
@@ -183,31 +143,12 @@ body {
         height: 35px;
         font-size: 16px;
     }
-
-    #header {
-        font-size: 20px; /* Smaller header font size */
-        padding: 10px 0;
-        border-bottom: 2px solid #3c4043; /* Ensures border size is visible */
-    }
 }
 
 @media (max-width: 480px) {
-    #chat-container {
-        height: calc(100vh - 40px); /* Adjust height for very small screens */
-    }
-
-    .message {
-        max-width: 95%;
-    }
-
-    .profile {
-        width: 25px;
-        height: 25px;
-    }
-
-    .text {
-        font-size: 12px;
-        padding: 6px;
+    #header {
+        font-size: 18px;
+        padding: 8px 0;
     }
 
     #input {
@@ -218,11 +159,5 @@ body {
         width: 30px;
         height: 30px;
         font-size: 14px;
-    }
-
-    #header {
-        font-size: 18px; /* Even smaller header font size */
-        padding: 8px 0;
-        border-bottom: 2px solid #3c4043; /* Ensures border size is visible */
     }
 }
