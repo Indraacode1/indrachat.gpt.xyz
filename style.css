@@ -1,0 +1,156 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #202123;
+    color: #e8eaed;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 0;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    align-items: flex-end;
+}
+
+.ai-message {
+    align-items: flex-start;
+    margin-right: 40px; /* Geser pesan AI ke kanan */
+}
+
+.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #5f6368;
+    margin-right: 10px;
+}
+
+.message-content {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
+
+.text {
+    background-color: #3c4043;
+    color: #c9c9c9;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: calc(100% - 60px); /* Adjust width to accommodate profile image */
+    word-wrap: break-word;
+}
+
+.user-message .text {
+    background-color: #303134;
+    color: #e8eaed;
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.ai-button {
+    background: none;
+    border: none;
+    color: #c9c9c9;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.ai-button:hover {
+    color: #e8eaed;
+}
+
+#input-area {
+    display: flex;
+    align-items: center;
+    background-color: #202123;
+    padding: 10px;
+    border-top: 1px solid #3c4043;
+}
+
+#input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #303134;
+    color: #e8eaed;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+#input::placeholder {
+    color: #c9c9c9;
+}
+
+#send-button {
+    background-color: #3c4043;
+    color: #e8eaed;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#send-button:hover {
+    background-color: #5f6368;
+}
+
+#header {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #e8eaed;
+    background-color: #303134;
+    border-bottom: 1px solid #3c4043;
+}
+
+.editable-text {
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    resize: none;
+    outline: none;
+    width: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
