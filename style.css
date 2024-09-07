@@ -8,16 +8,18 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow: hidden; /* Prevents body from scrolling */
 }
 
 #chat-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    height: calc(100vh - 60px); /* Adjusted height to account for header and input area */
     max-width: 100%;
     padding: 20px;
     box-sizing: border-box;
+    overflow-y: auto; /* Allows scrolling within chat container */
 }
 
 #messages {
@@ -92,6 +94,10 @@ body {
     background-color: #202123;
     padding: 10px;
     border-top: 1px solid #3c4043;
+    position: fixed; /* Keeps input area at the bottom of the screen */
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #input {
@@ -103,6 +109,7 @@ body {
     color: #e8eaed;
     font-size: 14px;
     margin-right: 10px;
+    box-sizing: border-box;
 }
 
 #input::placeholder {
@@ -135,19 +142,10 @@ body {
     color: #e8eaed;
     background-color: #303134;
     border-bottom: 1px solid #3c4043;
-}
-
-.editable-text {
-    background: none;
-    border: none;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    resize: none;
-    outline: none;
+    position: fixed; /* Keeps header at the top of the screen */
+    top: 0;
     width: 100%;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    box-sizing: border-box;
 }
 
 /* Responsive styles */
