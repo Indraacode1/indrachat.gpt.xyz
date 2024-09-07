@@ -11,14 +11,31 @@ body {
     overflow: hidden; /* Prevent scrolling on body */
 }
 
+#header {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #e8eaed;
+    background-color: #303134;
+    border-bottom: 2px solid #3c4043;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+    /* Ensure the header remains on top */
+}
+
 #chat-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100vh - 80px); /* Adjust height to account for header and input area */
     max-width: 100%;
     padding: 10px;
     box-sizing: border-box;
     overflow: hidden; /* Prevent scrolling on chat container */
+    margin-top: 60px; /* Margin to prevent overlap with header */
 }
 
 #messages {
@@ -111,21 +128,6 @@ body {
 
 #send-button:hover {
     background-color: #5f6368;
-}
-
-#header {
-    text-align: center;
-    padding: 15px 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: #e8eaed;
-    background-color: #303134;
-    border-bottom: 2px solid #3c4043;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1000;
 }
 
 /* Responsive styles */
