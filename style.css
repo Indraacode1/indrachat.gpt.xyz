@@ -1,4 +1,3 @@
-/* Default styles */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #202123;
@@ -8,41 +7,32 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden; /* Prevent scrolling on body */
 }
 
 #header {
     text-align: center;
-    padding: 15px 0;
+    padding: 15px;
     font-size: 24px;
     font-weight: bold;
     color: #e8eaed;
     background-color: #303134;
-    border-bottom: 2px solid #3c4043;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1000;
+    border-bottom: 1px solid #3c4043;
 }
 
 #chat-container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 80px); /* Adjust height to account for header and input area */
-    max-width: 100%;
-    padding: 10px;
+    height: 100%;
+    padding: 20px;
     box-sizing: border-box;
-    margin-top: 60px; /* Margin to prevent overlap with header */
-    overflow: hidden; /* Prevent scrolling on chat container */
+    overflow: hidden;
 }
 
 #messages {
     flex: 1;
-    overflow-y: auto; /* Enable scrolling only on messages area */
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 60px; /* Ensure space for input area */
+    overflow-y: auto;
+    padding: 10px 0;
+    margin-bottom: 10px; /* Ensure there is space below messages */
 }
 
 .message {
@@ -55,12 +45,12 @@ body {
 
 .user-message {
     align-items: flex-end;
-    margin-left: auto; /* Align messages to the right */
+    margin-right: 40px; /* Adjust alignment */
 }
 
 .ai-message {
     align-items: flex-start;
-    margin-right: auto; /* Align messages to the left */
+    margin-left: 40px; /* Adjust alignment */
 }
 
 .profile {
@@ -71,17 +61,42 @@ body {
     margin-right: 10px;
 }
 
+.message-content {
+    display: flex;
+    align-items: flex-start;
+}
+
 .text {
     background-color: #3c4043;
     color: #c9c9c9;
     padding: 10px;
     border-radius: 8px;
-    max-width: calc(100% - 60px); /* Ensure text does not exceed container width */
+    max-width: calc(100% - 60px); /* Adjust width to accommodate profile image */
     word-wrap: break-word;
 }
 
 .user-message .text {
     background-color: #303134;
+    color: #e8eaed;
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.ai-button {
+    background: none;
+    border: none;
+    color: #c9c9c9;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.ai-button:hover {
     color: #e8eaed;
 }
 
@@ -95,19 +110,17 @@ body {
     bottom: 0;
     width: 100%;
     box-sizing: border-box;
-    z-index: 1000;
 }
 
 #input {
     flex: 1;
-    padding: 12px;
+    padding: 10px;
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     background-color: #303134;
     color: #e8eaed;
     font-size: 14px;
     margin-right: 10px;
-    box-sizing: border-box;
 }
 
 #input::placeholder {
@@ -119,62 +132,16 @@ body {
     color: #e8eaed;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-button.copy {
-    color: #b0b0b0; /* Light grey color for copy button text */
+#send-button:hover {
+    background-color: #5f6368;
 }
 
-/* Remove CSS for non-essential buttons */
-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-/* Ensure buttons don't interfere with the layout */
-button:focus {
-    outline: none;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    #header {
-        font-size: 20px;
-        padding: 10px 0;
-    }
-
-    #input {
-        font-size: 12px;
-    }
-
-    #send-button {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-    }
-}
-
-@media (max-width: 480px) {
-    #header {
-        font-size: 18px;
-        padding: 8px 0;
-    }
-
-    #input {
-        font-size: 10px;
-    }
-
-    #send-button {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
-    }
-}
