@@ -1,4 +1,3 @@
-// Function to fetch GPT response
 async function fetchGPTResponse(userInput) {
     const response = await fetch(`${gptApiUrl}?text=${encodeURIComponent(userInput)}&apikey=${apiKey}`, {
         method: 'GET',
