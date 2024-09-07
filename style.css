@@ -39,18 +39,18 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    max-width: 80%;
+    max-width: 100%; /* Ubah jadi 100% agar pesan full lebar */
     word-wrap: break-word;
 }
 
 .user-message {
     align-items: flex-end;
-    margin-right: 30px; /* Geser pesan user lebih ke kanan */
+    margin-right: 0; /* Menghilangkan margin agar pesan user mentok kanan */
 }
 
 .ai-message {
     align-items: flex-start;
-    margin-left: 30px; /* Geser pesan AI lebih ke kiri */
+    margin-left: 0; /* Menghilangkan margin agar pesan AI mentok kiri */
 }
 
 .profile {
@@ -71,13 +71,18 @@ body {
     color: #c9c9c9;
     padding: 10px;
     border-radius: 8px;
-    max-width: calc(100% - 60px); /* Adjust width to accommodate profile image */
+    max-width: 100%; /* Adjust width to accommodate full screen */
     word-wrap: break-word;
 }
 
 .user-message .text {
     background-color: #303134;
     color: #e8eaed;
+    max-width: calc(100% - 20px); /* Pesan user menempel di kanan dengan jarak kecil */
+}
+
+.ai-message .text {
+    max-width: calc(100% - 20px); /* Pesan AI menempel di kiri dengan jarak kecil */
 }
 
 .controls {
@@ -120,8 +125,8 @@ body {
     background-color: #303134;
     color: #e8eaed;
     font-size: 14px;
-    margin-right: 15px; /* Geser input text lebih ke kiri */
-    margin-left: 15px;  /* Geser input text lebih ke kiri */
+    margin-right: 5px; /* Menggeser sedikit tombol kirim */
+    margin-left: 5px;  /* Menggeser sedikit input text */
 }
 
 #input::placeholder {
