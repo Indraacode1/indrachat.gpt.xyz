@@ -18,13 +18,14 @@ body {
     max-width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    overflow-y: hidden; /* Prevent scrolling on chat container */
+    overflow: hidden; /* Prevent scrolling on chat container */
 }
 
 #messages {
     flex: 1;
     overflow-y: auto; /* Enable scrolling only on messages area */
     padding-bottom: 60px; /* Ensure space for input area */
+    box-sizing: border-box;
 }
 
 .message {
