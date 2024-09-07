@@ -45,12 +45,12 @@ body {
 
 .user-message {
     align-items: flex-end;
-    margin-right: 40px; /* Adjust alignment */
+    margin-right: 20px; /* Adjust user message alignment (right) */
 }
 
 .ai-message {
     align-items: flex-start;
-    margin-left: 40px; /* Adjust alignment */
+    margin-left: 20px; /* Adjust AI message alignment (left) */
 }
 
 .profile {
@@ -110,6 +110,7 @@ body {
     bottom: 0;
     width: 100%;
     box-sizing: border-box;
+    justify-content: center; /* Center the input area */
 }
 
 #input {
@@ -121,6 +122,7 @@ body {
     color: #e8eaed;
     font-size: 14px;
     margin-right: 10px;
+    margin-left: 10px; /* Shift input field slightly to the right */
 }
 
 #input::placeholder {
@@ -139,9 +141,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 10px; /* Shift send button slightly to the right */
 }
 
 #send-button:hover {
     background-color: #5f6368;
 }
-
