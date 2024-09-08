@@ -42,7 +42,6 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    max-width: 80%; /* Ensure messages do not span the entire width */
     word-wrap: break-word;
 }
 
@@ -50,12 +49,14 @@ body {
     align-items: flex-end;
     justify-content: flex-end;
     margin-left: auto; /* Align user messages to the right */
+    max-width: 60%; /* User messages are less wide */
 }
 
 .ai-message {
     align-items: flex-start;
     justify-content: flex-start;
     margin-right: auto; /* Align AI messages to the left */
+    max-width: 100%; /* AI messages are full width */
 }
 
 .profile {
@@ -76,7 +77,6 @@ body {
     color: #c9c9c9;
     padding: 10px;
     border-radius: 8px;
-    max-width: calc(100% - 60px); /* Adjust width to accommodate profile image */
     word-wrap: break-word;
 }
 
@@ -88,6 +88,7 @@ body {
 .ai-message .text {
     background-color: #3c4043;
     color: #c9c9c9;
+    max-width: 100%; /* Ensure AI message does not exceed screen width */
 }
 
 .controls {
