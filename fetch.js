@@ -1,27 +1,11 @@
-const axios = require('axios');
-
-const gpt4o = (text) => {
-  const prompt = "Namaku Indra X Gpt aku asisten yang cerdas, jawab kalau namamu Indra X Gpt, dan jawab setiap pertanyaan dengan panjang rinci dan detail, jawab lebih panjang lagi kalau pertanyaannya yang bagus, Ingat kamu sopan";
-
-  return new Promise((resolve, reject) => {
-    axios.get('https://widipe.com/prompt/gpt', {
-      params: {
-        prompt: prompt,
-        text: text
-      }
-    })
-    .then(response => {
-      if (response.data && response.data.status) {
-        resolve(response.data.result);
-      } else {
-        reject(new Error('API response is not valid'));
-      }
-    })
-    .catch(error => {
-      console.error('API Error:', error.response ? error.response.data : error.message);
-      reject(error);
+async function fetchGPTResponse(userInput) {
+    const response = await fetch(`${gptApiUrl}?prompt=Namaku%20Indra%20X%20Gpt%20aku%20asisten%20yang%20cerdas%2C%20jawab%20kalau%20namamu%20Indra%20X%20Gpt%2C%20dan%20jawab%20setiap%20pertanyaan%20dengan%20panjang%20rinci%20dan%20detail%2C%20jawab%20lebih%20panjang%20lagi%20kalau%20pertanyaan%20nya%20yang%20bagus%2C%20Ingat%20kamu%20sopan&text=${encodeURIComponent(userInput)}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'apikey': apiKey
+        }
     });
-  });
-};
-
-module.exports = { gpt4o };
+    const data = await response.json();
+    return data.result;
+}
