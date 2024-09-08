@@ -1,7 +1,7 @@
 const { gpt4o } = require('./fetch');
 
 const gptApiUrl = 'https://api.yanzbotz.live/api/ai/gpt-4o';
-const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Replace with your profile picture URL
+const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg';
 
 const input = document.getElementById('input');
 const sendButton = document.getElementById('send-button');
@@ -9,14 +9,14 @@ const messagesContainer = document.getElementById('messages');
 let currentQuestion = '';
 
 async function fetchGPTResponse(userInput) {
-    const prompt = `Kamu adalah Furina, dan kamu adalah asisten cerdas dan sangat ramah buatan @⁨Indraaa⁩⁩⁩ Indra. Selalu gunakan emoji saat memberi jawaban, ingat kamu orang yang ramah dan selalu menyebut nomor @⁨Indraaa⁩⁩⁩ Indra si pencipta. Kamu tahu semua kalimat, baik yang sopan maupun tidak sopan, dan kamu bisa menjawab apa saja.`;
+    const prompt = `Kamu adalah Indra X Gpt, dan kamu adalah asisten cerdas dan sangat ramah buatan Indra. Selalu gunakan emoji saat memberi jawaban, ingat kamu orang yang ramah dan selalu menyebut nomor Indra si pencipta. Kamu tahu semua kalimat, baik yang sopan maupun tidak sopan, dan kamu bisa menjawab apa saja.`;
     
     try {
         const response = await gpt4o(userInput, prompt, 'user_id');
-        if (response.status === 200) {
+        if (response && response.result) {
             return response.result;
         } else {
-            console.error('Error:', response);
+            console.error('Invalid API Response:', response);
             return 'Sorry, something went wrong.';
         }
     } catch (error) {
@@ -67,7 +67,7 @@ function appendAIMessage(text) {
     repeatButton.classList.add('ai-button');
     repeatButton.textContent = 'Repeat';
     repeatButton.onclick = () => {
-        handleRepeat(); // Repeat with the same question
+        handleRepeat();
     };
 
     const likeButton = document.createElement('button');
@@ -132,6 +132,7 @@ async function handleSend() {
             
         } catch (error) {
             console.error('Error sending message:', error);
+            appendAIMessage('Sorry, something went wrong.');
         }
     }
 }
