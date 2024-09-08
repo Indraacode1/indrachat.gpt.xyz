@@ -11,6 +11,10 @@ async function fetchGPTResponse(userInput) {
     const id = '12345'; // ID kustom untuk mengidentifikasi sesi/percakapan
 
     try {
+        // Logging user input and system prompt
+        console.log('User Input:', userInput);
+        console.log('System Prompt:', systemPrompt);
+
         const response = await fetch(`${gptApiUrl}?query=${encodeURIComponent(userInput)}&system=${encodeURIComponent(systemPrompt)}&id=${id}&apiKey=Indra`, {
             method: 'GET',
             headers: {
@@ -20,15 +24,23 @@ async function fetchGPTResponse(userInput) {
         });
 
         const result = await response.json();
+        
+        // Logging the entire result for debugging
+        console.log('API Response:', result);
 
         if (response.ok) {
-            return result.data;
+            if (result && result.data) {
+                return result.data;
+            } else {
+                console.error('Invalid response format:', result);
+                return 'Maaf, format respons tidak valid.';
+            }
         } else {
             console.error('Error:', result);
             return 'Maaf, ada kesalahan dalam memproses permintaan Anda.';
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error during fetch:', error);
         return 'Maaf, terjadi kesalahan saat menghubungi server.';
     }
 }
