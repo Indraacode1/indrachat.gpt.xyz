@@ -1,5 +1,5 @@
-const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-completions?apikey=indradev';
-const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Replace with your profile picture URL
+const gptApiUrl = 'https://api.yanzbotz.live/api/ai/gpt-4o'; // Menggunakan API Yanzbot
+const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Ganti dengan URL foto profil Anda
 
 const input = document.getElementById('input');
 const sendButton = document.getElementById('send-button');
@@ -7,32 +7,29 @@ const messagesContainer = document.getElementById('messages');
 let currentQuestion = '';
 
 async function fetchGPTResponse(userInput) {
-    const requestData = [
-        { "role": "user", "content": userInput },
-        { "role": "assistant", "content": "Nama saya adalah IndraChat Ai. Saya diciptakan oleh Indra untuk membantu Anda dengan berbagai pertanyaan dan informasi yang Anda butuhkan. Apakah ada yang bisa saya bantu?" }
-    ];
+    const systemPrompt = "Nama saya adalah IndraChat Ai. Saya diciptakan oleh Indra, umur 16 tahun, yang membuat saya sendiri waktu malam hari. Dia sekolah baru kelas 11.";
+    const id = '12345'; // ID kustom untuk mengidentifikasi sesi/percakapan
 
     try {
-        const response = await fetch(gptApiUrl, {
-            method: 'POST',
+        const response = await fetch(`${gptApiUrl}?query=${encodeURIComponent(userInput)}&system=${encodeURIComponent(systemPrompt)}&id=${id}&apiKey=Indra`, {
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
+            }
         });
 
         const result = await response.json();
 
-        if (result.status === 200) {
-            return result.data.msg;
+        if (response.ok) {
+            return result.data;
         } else {
             console.error('Error:', result);
-            return 'Sorry, something went wrong.';
+            return 'Maaf, ada kesalahan dalam memproses permintaan Anda.';
         }
     } catch (error) {
         console.error('Error:', error);
-        return 'Sorry, something went wrong.';
+        return 'Maaf, terjadi kesalahan saat menghubungi server.';
     }
 }
 
