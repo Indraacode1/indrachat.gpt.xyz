@@ -1,36 +1,39 @@
-const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-completions?apikey=indradev';
+const gpt4o = (query, system, id) => {
+  return new Promise((resolve, reject) => {
+    axios.get('https://api.yanzbotz.live/api/ai/gpt-4o', {
+      params: {
+        query: query,
+        system: system,
+        id: id,
+        apiKey: 'Indra'
+      }
+    })
+    .then(response => resolve(response.data))
+    .catch(error => reject(error));
+  });
+};
 
-async function fetchGPTResponse(userInput) {
-    // Deteksi jika ada pertanyaan tentang pencipta AI
+export async function fetchGPTResponse(userInput) {
     const lowerUserInput = userInput.toLowerCase();
     const creatorKeywords = ['siapa yang membuatmu', 'siapa penciptamu', 'siapa yang menciptakanmu'];
 
+    // Jika pertanyaan tentang pencipta, jawab secara langsung
     if (creatorKeywords.some(keyword => lowerUserInput.includes(keyword))) {
         return 'Saya dibuat oleh Indra, umur 16 tahun. Dia membuat saya sendiri pada malam hari ketika dia kelas 11 di sekolah.';
     }
 
-    const prompt = [
-        { "role": "system", "content": "Anda adalah asisten AI yang sangat cerdas dan responsif bernama IndraChat AI. Jawablah pertanyaan dengan jelas, tepat, dan mudah dipahami. Jika tidak yakin atau tidak tahu jawabannya, katakan 'Maaf, saya tidak tahu'." },
-        { "role": "user", "content": userInput }
-    ];
+    // Buat prompt sistem untuk AI
+    const systemPrompt = "Anda adalah asisten AI bernama IndraChat AI, yang selalu membantu dengan jawaban yang akurat dan ramah.";
 
     try {
-        const response = await fetch(gptApiUrl, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(prompt)
-        });
+        // Panggil API gpt4o dengan prompt dan query pengguna
+        const response = await gpt4o(userInput, systemPrompt, '1234');  // ID bisa diganti sesuai kebutuhan
 
-        const result = await response.json();
-
-        if (result.status === 200 && result.data && result.data.msg) {
-            return result.data.msg;
+        if (response && response.status === 200) {
+            return response.data.response;  // Ambil pesan dari data respons API
         } else {
-            console.error('Error:', result);
-            return 'Maaf, terjadi kesalahan.';
+            console.error('Error:', response);
+            return 'Maaf, terjadi kesalahan saat mengambil respons AI.';
         }
     } catch (error) {
         console.error('Error:', error);
