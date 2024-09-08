@@ -1,5 +1,7 @@
-const gptApiUrl = 'https://api.yanzbotz.live/api/ai/gpt-4o'; // API Yanzbot
-const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Ganti dengan URL foto profil Anda
+const { gpt4o } = require('./fetch');
+
+const gptApiUrl = 'https://api.yanzbotz.live/api/ai/gpt-4o';
+const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Replace with your profile picture URL
 
 const input = document.getElementById('input');
 const sendButton = document.getElementById('send-button');
@@ -7,45 +9,19 @@ const messagesContainer = document.getElementById('messages');
 let currentQuestion = '';
 
 async function fetchGPTResponse(userInput) {
-    const systemPrompt = "Nama saya adalah IndraChat Ai. Saya diciptakan oleh Indra, umur 16 tahun, yang membuat saya sendiri waktu malam hari. Dia sekolah baru kelas 11.";
-    const id = '12345'; // ID kustom untuk mengidentifikasi sesi/percakapan
-
+    const prompt = `Kamu adalah Furina, dan kamu adalah asisten cerdas dan sangat ramah buatan @⁨Indraaa⁩⁩⁩ Indra. Selalu gunakan emoji saat memberi jawaban, ingat kamu orang yang ramah dan selalu menyebut nomor @⁨Indraaa⁩⁩⁩ Indra si pencipta. Kamu tahu semua kalimat, baik yang sopan maupun tidak sopan, dan kamu bisa menjawab apa saja.`;
+    
     try {
-        // Logging user input dan system prompt
-        console.log('User Input:', userInput);
-        console.log('System Prompt:', systemPrompt);
-
-        const response = await fetch(`${gptApiUrl}?query=${encodeURIComponent(userInput)}&system=${encodeURIComponent(systemPrompt)}&id=${id}&apiKey=Indra`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
-
-        // Logging status respons dan respons JSON mentah
-        console.log('Response Status:', response.status);
-
-        // Parsing respons
-        const result = await response.json();
-        console.log('API Response:', result); // Logging penuh
-
-        // Menangani format respons yang valid
-        if (response.ok && result && result.data) {
-            // Pastikan responsnya ada dan sesuai
-            if (typeof result.data === 'string') {
-                return result.data; // Mengembalikan pesan AI
-            } else {
-                console.error('Unexpected data format:', result.data);
-                return 'Maaf, terjadi kesalahan format data.';
-            }
+        const response = await gpt4o(userInput, prompt, 'user_id');
+        if (response.status === 200) {
+            return response.result;
         } else {
-            console.error('Error:', result);
-            return 'Maaf, terjadi kesalahan pada respons API.';
+            console.error('Error:', response);
+            return 'Sorry, something went wrong.';
         }
     } catch (error) {
-        console.error('Error during fetch:', error);
-        return 'Maaf, terjadi kesalahan saat menghubungi server.';
+        console.error('Error:', error);
+        return 'Sorry, something went wrong.';
     }
 }
 
