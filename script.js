@@ -1,55 +1,33 @@
-const gptApiUrl = 'https://widipe.com/prompt/gpt';
+const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-4';
+const apiKey = 'indradev';
 const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Replace with your profile picture URL
 
 const input = document.getElementById('input');
 const sendButton = document.getElementById('send-button');
 const messagesContainer = document.getElementById('messages');
 let currentQuestion = '';
-
-async function fetchGPTResponse(userInput) {
-    try {
-        const response = await fetch(`${gptApiUrl}?prompt=Namaku%20Indra%20X%20Gpt%20aku%20asisten%20yang%20cerdas%2C%20jawab%20kalau%20namamu%20Indra%20X%20Gpt%2C%20dan%20jawab%20setiap%20pertanyaan%20dengan%20panjang%20rinci%20dan%20detail%2C%20jawab%20lebih%20panjang%20lagi%20kalau%20pertanyaan%20nya%20yang%20bagus%2C%20Ingat%20kamu%20sopan&text=${encodeURIComponent(userInput)}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        
-        const data = await response.json();
-        console.log('API Response:', data); // Print response for debugging
-        
-        if (data && data.result) {
-            return data.result;
-        } else {
-            console.error('Invalid API response structure:', data);
-            return 'Maaf, tidak ada jawaban dari API.';
-        }
-    } catch (error) {
-        console.error('Error fetching GPT response:', error);
-        return 'Terjadi kesalahan saat mengambil jawaban.';
-    }
-}
+let typingEffectTimeouts = []; // Array to keep track of typing effect timeouts
 
 function appendUserMessage(text) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', 'user-message');
-    
+
     const textDiv = document.createElement('div');
     textDiv.classList.add('text');
     textDiv.textContent = text;
 
     messageDiv.appendChild(textDiv);
     messagesContainer.appendChild(messageDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    scrollToBottom(); // Scroll to the bottom after adding a new message
 }
 
 function appendAIMessage(text) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', 'ai-message');
-    
+
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('message-content');
-    
+
     const profileImg = document.createElement('img');
     profileImg.classList.add('profile');
     profileImg.src = aiProfileUrl;
@@ -99,7 +77,7 @@ function appendAIMessage(text) {
     messageDiv.appendChild(contentDiv);
     messageDiv.appendChild(controlsDiv);
     messagesContainer.appendChild(messageDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    scrollToBottom(); // Scroll to the bottom after adding a new message
 
     return textDiv;
 }
@@ -111,6 +89,12 @@ function getTypingSpeed(textLength) {
     return baseSpeed / lengthFactor + Math.random() * speedVariance;
 }
 
+function clearTypingEffect() {
+    // Clear all existing typing effect timeouts
+    typingEffectTimeouts.forEach(timeout => clearTimeout(timeout));
+    typingEffectTimeouts = [];
+}
+
 async function handleSend() {
     const userInput = input.value.trim();
     if (userInput) {
@@ -118,27 +102,34 @@ async function handleSend() {
         currentQuestion = userInput;
         input.value = '';
 
+        // Stop any ongoing typing effect
+        clearTypingEffect();
+
         try {
             const aiText = await fetchGPTResponse(currentQuestion);
             const aiMessageDiv = appendAIMessage('');
-            let messageText = aiMessageDiv;
+            let messageTextDiv = aiMessageDiv;
 
             let index = 0;
             const typingSpeed = getTypingSpeed(aiText.length);
 
             function typeText() {
                 if (index < aiText.length) {
-                    messageText.textContent += aiText[index++];
-                    setTimeout(typeText, typingSpeed);
+                    messageTextDiv.textContent += aiText[index++];
+                    typingEffectTimeouts.push(setTimeout(typeText, typingSpeed));
                 }
             }
 
             typeText();
-            
+
         } catch (error) {
             console.error('Error sending message:', error);
         }
     }
+}
+
+function scrollToBottom() {
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
 sendButton.addEventListener('click', () => handleSend());
