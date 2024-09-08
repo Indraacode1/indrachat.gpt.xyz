@@ -1,40 +1,62 @@
-const gptApiUrl = 'https://apisku-furina.vercel.app/api/ai/gpt-4';
-const apiKey = 'indradev';
-const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Replace with your profile picture URL
+const gptApiUrl = 'https://widipe.com/prompt/gpt';
+const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Ganti dengan URL gambar profil Anda
 
 const input = document.getElementById('input');
 const sendButton = document.getElementById('send-button');
 const messagesContainer = document.getElementById('messages');
 let currentQuestion = '';
-let typingEffectTimeouts = []; // Array to keep track of typing effect timeouts
+let typingEffectTimeouts = []; // Array untuk menyimpan timeout typing effect
+
+async function fetchGPTResponse(userInput) {
+    try {
+        const response = await fetch(`${gptApiUrl}?prompt=Namaku%20Indra%20X%20Gpt%20aku%20asisten%20yang%20cerdas%2C%20jawab%20kalau%20namamu%20Indra%20X%20Gpt%2C%20dan%20jawab%20setiap%20pertanyaan%20dengan%20panjang%20rinci%20dan%20detail%2C%20jawab%20lebih%20panjang%20lagi%20kalau%20pertanyaan%20nya%20yang%20bagus%2C%20Ingat%20kamu%20sopan&text=${encodeURIComponent(userInput)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const data = await response.json();
+        console.log('API Response:', data); // Print response for debugging
+        
+        if (data && data.result) {
+            return data.result;
+        } else {
+            console.error('Invalid API response structure:', data);
+            return 'Maaf, tidak ada jawaban dari API.';
+        }
+    } catch (error) {
+        console.error('Error fetching GPT response:', error);
+        return 'Terjadi kesalahan saat mengambil jawaban.';
+    }
+}
 
 function appendUserMessage(text) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', 'user-message');
-
+    
     const textDiv = document.createElement('div');
     textDiv.classList.add('text');
     textDiv.textContent = text;
 
     messageDiv.appendChild(textDiv);
     messagesContainer.appendChild(messageDiv);
-    scrollToBottom(); // Scroll to the bottom after adding a new message
+    scrollToBottom();
 }
 
-function appendAIMessage(text) {
+function appendAIMessage() {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', 'ai-message');
-
+    
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('message-content');
-
+    
     const profileImg = document.createElement('img');
     profileImg.classList.add('profile');
     profileImg.src = aiProfileUrl;
 
     const textDiv = document.createElement('div');
     textDiv.classList.add('text');
-    textDiv.textContent = text;
 
     const controlsDiv = document.createElement('div');
     controlsDiv.classList.add('controls');
@@ -77,7 +99,7 @@ function appendAIMessage(text) {
     messageDiv.appendChild(contentDiv);
     messageDiv.appendChild(controlsDiv);
     messagesContainer.appendChild(messageDiv);
-    scrollToBottom(); // Scroll to the bottom after adding a new message
+    scrollToBottom();
 
     return textDiv;
 }
@@ -107,7 +129,7 @@ async function handleSend() {
 
         try {
             const aiText = await fetchGPTResponse(currentQuestion);
-            const aiMessageDiv = appendAIMessage('');
+            const aiMessageDiv = appendAIMessage();
             let messageTextDiv = aiMessageDiv;
 
             let index = 0;
@@ -121,7 +143,7 @@ async function handleSend() {
             }
 
             typeText();
-
+            
         } catch (error) {
             console.error('Error sending message:', error);
         }
