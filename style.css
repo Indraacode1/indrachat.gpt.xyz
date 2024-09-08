@@ -22,7 +22,7 @@ body {
 #chat-container {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    height: 100%;
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
@@ -115,10 +115,10 @@ body {
     border-top: 1px solid #3c4043;
     position: fixed;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    width: calc(100% - 20px); /* Full width minus padding */
     box-sizing: border-box;
-    z-index: 1; /* Ensure it stays above other elements */
 }
 
 #input {
