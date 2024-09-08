@@ -1,4 +1,4 @@
-const gptApiUrl = 'https://api.yanzbotz.live/api/ai/gpt-4o'; // Menggunakan API Yanzbot
+const gptApiUrl = 'https://api.yanzbotz.live/api/ai/gpt-4o'; // API Yanzbot
 const aiProfileUrl = 'https://cdn.meitang.xyz/tmp/bgdx4smh3cq1ta1u0fs2.jpg'; // Ganti dengan URL foto profil Anda
 
 const input = document.getElementById('input');
@@ -11,7 +11,7 @@ async function fetchGPTResponse(userInput) {
     const id = '12345'; // ID kustom untuk mengidentifikasi sesi/percakapan
 
     try {
-        // Logging user input and system prompt
+        // Logging user input dan system prompt
         console.log('User Input:', userInput);
         console.log('System Prompt:', systemPrompt);
 
@@ -23,21 +23,25 @@ async function fetchGPTResponse(userInput) {
             }
         });
 
-        const result = await response.json();
-        
-        // Logging the entire result for debugging
-        console.log('API Response:', result);
+        // Logging status respons dan respons JSON mentah
+        console.log('Response Status:', response.status);
 
-        if (response.ok) {
-            if (result && result.data) {
-                return result.data;
+        // Parsing respons
+        const result = await response.json();
+        console.log('API Response:', result); // Logging penuh
+
+        // Menangani format respons yang valid
+        if (response.ok && result && result.data) {
+            // Pastikan responsnya ada dan sesuai
+            if (typeof result.data === 'string') {
+                return result.data; // Mengembalikan pesan AI
             } else {
-                console.error('Invalid response format:', result);
-                return 'Maaf, format respons tidak valid.';
+                console.error('Unexpected data format:', result.data);
+                return 'Maaf, terjadi kesalahan format data.';
             }
         } else {
             console.error('Error:', result);
-            return 'Maaf, ada kesalahan dalam memproses permintaan Anda.';
+            return 'Maaf, terjadi kesalahan pada respons API.';
         }
     } catch (error) {
         console.error('Error during fetch:', error);
